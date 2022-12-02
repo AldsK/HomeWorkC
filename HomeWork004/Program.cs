@@ -14,14 +14,13 @@ Console.WriteLine(sum);
 // Второй вариант
 Console.WriteLine("Введите число А: ");
 int numberA = Convert.ToInt32(Console.ReadLine());
-int num = numberA;
 Console.WriteLine("Введите число B: ");
 int numberB = Convert.ToInt32(Console.ReadLine());
 int count = 1;
 int sum = numberA;
 while (count < numberB)
 {
-    sum = sum * num;
+    sum = sum * numberA;
     count++;
 }
 Console.WriteLine($"{numberA} в степени {numberB} = {sum}");
