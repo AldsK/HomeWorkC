@@ -18,12 +18,13 @@ namespace Project
                 FillArray(array);
                 PrintArray(array);
                 Console.WriteLine();
-                ChangeMinRows(array);
+                // ChangeMinRows(array);
+                VyborSort(array);
                 PrintArray(array);
                
 
             }
-            Zadacha54();
+            // Zadacha54();
             // Задача 56. Задайте прямоугольный двумерный массив. Напишите программу, 
             // которая будет находить строку с наименьшей суммой элементов.
             static void Zadacha56()
@@ -35,9 +36,40 @@ namespace Project
                 PrintArray(array);
                 SearchMinRows(array);
             }
-            Zadacha56();
+            // Zadacha56();
+            // Задача 58. Спираль
+            static void Zadacha58()
+            {
+                int rows = 4;
+                int columns = 4;
+                int[,] array = new int[rows,columns];
+                int indexRow = 0;
+                int indexColumns = 0;
 
-            static void FillArray(int[,] array, int minValue = 1, int maxValue = 10)
+                int biasRow = 0;
+                int biasColumns = 1;
+
+                int steps = columns;
+
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[indexRow, indexColumns] = i+1;
+                    Console.Write($"[{indexRow},{indexColumns}] {array[indexRow, indexColumns]}");
+                    steps--;
+                    if (steps == 0)
+                    {
+                        int temp = biasRow;
+                        biasRow = biasColumns;
+                        biasColumns = temp;
+                    }
+                    indexRow += biasRow;
+                    indexColumns += biasColumns;
+                }
+            }
+            Zadacha58();
+
+            static void FillArray(int[,] array, int minValue = -10, int maxValue = 10)
             {
                 Random rand = new Random();
                 maxValue++;
@@ -91,6 +123,7 @@ namespace Project
                 int rows = array.GetLength(0);
                 int columns = array.GetLength(1);
                 int min = int.MaxValue;
+                int indexMin = 0;
                 for (int i = 0; i < rows; i++)
                 {
                     int sum = 0;
@@ -105,12 +138,35 @@ namespace Project
                     if (sum < min)
                     {
                         min = sum;
+                        indexMin = i;
                     }
                 }
-                Console.WriteLine($"Минимальная сумма = {min}");
+                Console.WriteLine($"Минимальная сумма {min}  находится в строке номер {indexMin+1}");
                 
             }
-            
+            static void VyborSort(int[,] array)
+            {
+                int rows = array.GetLength(0);
+                int columns = array.GetLength(1);
+                
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        int indexMax = j;
+                        for (int k = j + 1; k < columns; k++)
+                        {
+                            if (array[i, indexMax] > array[i, k])
+                            {
+                                indexMax = k;
+                            }
+                        }
+                    int temp = array[i, j];
+                    array[i, j] = array[i, indexMax];
+                    array[i, indexMax] = temp;
+                    }
+                }
+            }
         }
 
 
